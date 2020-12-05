@@ -1,0 +1,4 @@
+<resources>
+	<string name="plan_not_found">DO/SJ tidak ditemukan</string>
+	<string name="camera_denied">Harap pasang perijinan Camera</string>
+</resources>

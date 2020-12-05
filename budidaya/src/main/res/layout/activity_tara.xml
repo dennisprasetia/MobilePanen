@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".flow.TaraActivity">
+
+	<TextView
+		android:id="@+id/title_tara"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentStart="true"
+		android:layout_alignParentEnd="true"
+		android:paddingTop="10dp"
+		android:paddingBottom="10dp"
+		android:text="Penimbangan Tara"
+		android:textColor="@color/cardview_light_background"
+		android:textSize="22dp"
+		android:textStyle="bold"
+		android:gravity="center"
+		android:background="@color/colorPrimary"/>
+
+	<LinearLayout
+		android:id="@+id/ll_data_receive"
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/title_tara"
+		android:layout_alignParentStart="true"
+		android:layout_alignParentEnd="true"
+		android:gravity="center">
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Berat Tara"
+			android:textSize="18dp"/>
+		<EditText
+			android:id="@+id/value_tara"
+			android:layout_width="70dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="10dp"
+			android:layout_marginEnd="10dp"/>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Kg"
+			android:textSize="18dp"/>
+	</LinearLayout>
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/rv_list_tara"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_below="@id/ll_data_receive"
+		android:layout_above="@id/ll_button_tara"
+		android:layout_alignParentStart="true"
+		android:layout_alignParentEnd="true"
+		android:layout_marginTop="10dp"
+		android:padding="10dp"
+		android:background="@color/cardview_dark_background"
+		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+	<LinearLayout
+		android:id="@+id/ll_button_tara"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentStart="true"
+		android:layout_alignParentEnd="true"
+		android:orientation="horizontal"
+		android:padding="10dp"
+		android:gravity="center">
+		<Button
+			android:id="@+id/btnRefresh"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Refresh"/>
+
+		<Button
+			android:id="@+id/btnSimpan"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Simpan"/>
+	</LinearLayout>
+</RelativeLayout>

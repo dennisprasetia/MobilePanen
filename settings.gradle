@@ -1,0 +1,4 @@
+include ':mitra'
+include ':budidaya'
+include ':app'
+rootProject.name = "Mobile Panen"

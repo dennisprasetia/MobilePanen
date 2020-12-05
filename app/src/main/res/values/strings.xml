@@ -1,0 +1,22 @@
+<resources>
+	<string name="app_name">Mobile Panen</string>
+	<string name="hello_blank_fragment">Hello blank fragment</string>
+
+	<string name="biometric_failed">Sidik jari tidak dikenali</string>
+	<string name="biometric_title">Login</string>
+	<string name="biometric_subtitle">Masuk Mobile Panen</string>
+	<string name="biometric_description">Letakan jari anda di alat sidik jari untuk verifikasi
+		identitas anda</string>
+	<string name="biometric_negative_button_text">BATAL</string>
+	<string name="biometric_error_sdk_not_supported">Versi SDK tidak mendukung</string>
+	<string name="biometric_error_hardware_not_supported">Perangkat tidak mendukung fitur
+		sidik jari</string>
+	<string name="biometric_error_fingerprint_not_available">Sidik jari belum terdaftar di
+		perangkat</string>
+	<string name="biometric_error_permission_not_granted">Perijinan tidak diberikan oleh
+		user</string>
+	<string name="biometric_failure">Sidik jari tidak dikenali</string>
+	<string name="biometric_cancelled">Autentikasi dibatalkan oleh user</string>
+	<string name="biometric_success">Sidik jari dikenali</string>
+	<string name="login">Login</string>
+</resources>
