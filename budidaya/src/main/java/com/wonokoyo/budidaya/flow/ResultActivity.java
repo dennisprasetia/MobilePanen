@@ -1,6 +1,7 @@
 package com.wonokoyo.budidaya.flow;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.wonokoyo.budidaya.model.Plan;
 import com.wonokoyo.budidaya.model.Real;
 import com.wonokoyo.budidaya.model.Tara;
 import com.wonokoyo.budidaya.model.Weigh;
+import com.wonokoyo.budidaya.model.adapter.WeighAdapter;
 import com.wonokoyo.budidaya.model.viewmodel.FlowViewModel;
 
 import java.util.List;
@@ -30,12 +32,15 @@ public class ResultActivity extends AppCompatActivity {
     private TextView tvEkor;
     private TextView tvBb;
     private Button btnOk;
+    private RecyclerView rvWeigh;
 
     private Plan plan;
 
     FlowViewModel flowViewModel;
 
     TimePref timePref;
+
+    WeighAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +74,12 @@ public class ResultActivity extends AppCompatActivity {
         tvNetto = findViewById(R.id.real_netto);
         tvEkor = findViewById(R.id.real_ekor);
         tvBb = findViewById(R.id.real_bb);
+
+        adapter = new WeighAdapter();
+        rvWeigh = findViewById(R.id.rv_list_weigh);
+        rvWeigh.setAdapter(adapter);
+
+        adapter.updateData(plan.getWeighs());
 
         btnOk = findViewById(R.id.btnOk);
         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +126,7 @@ public class ResultActivity extends AppCompatActivity {
         tvBruto.setText(String.format("%.2f", bruto));
         tvTara.setText(tara_avg);
         tvNetto.setText(String.format("%.2f", netto));
+        tvEkor.setText(String.valueOf(quan));
         tvBb.setText(String.format("%.2f", bb_avg));
 
         // SAVE REAL
