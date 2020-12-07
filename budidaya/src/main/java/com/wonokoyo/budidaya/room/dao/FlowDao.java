@@ -6,7 +6,9 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
+import androidx.room.Update;
 
+import com.wonokoyo.budidaya.model.Real;
 import com.wonokoyo.budidaya.model.Tara;
 import com.wonokoyo.budidaya.model.Weigh;
 
@@ -21,6 +23,14 @@ public interface FlowDao {
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Long insert(Weigh weigh);
+
+    @Transaction
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    Long insert(Real real);
+
+    @Transaction
+    @Update
+    void update(Real real);
 
     @Transaction
     @Query("SELECT * FROM tara WHERE rit = :rit AND tgl_tara = :tgl_tara")

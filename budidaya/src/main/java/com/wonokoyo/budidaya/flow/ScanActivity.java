@@ -13,9 +13,13 @@ import android.widget.Toast;
 
 import com.google.zxing.Result;
 import com.wonokoyo.budidaya.R;
+import com.wonokoyo.budidaya.helper.TimePref;
 import com.wonokoyo.budidaya.model.Plan;
 import com.wonokoyo.budidaya.model.Tara;
 import com.wonokoyo.budidaya.model.viewmodel.PlanViewModel;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -27,11 +31,15 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
     PlanViewModel planViewModel;
 
+    TimePref timePref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_scan);
+
+        timePref = new TimePref(this);
 
         planViewModel = new PlanViewModel();
         planViewModel.init(getApplication());
@@ -75,6 +83,11 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
             @Override
             public void onChanged(Plan plan) {
                 if (plan != null) {
+                    // SET JAM MULAI PANEN
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String time = sdf.format(new Date());
+                    timePref.saveSPString(TimePref.TM_MULAI, time);
+
                     Intent intent = new Intent(ScanActivity.this, TaraActivity.class);
                     intent.putExtra("plan", plan);
                     startActivity(intent);

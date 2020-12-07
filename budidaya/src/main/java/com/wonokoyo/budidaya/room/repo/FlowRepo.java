@@ -3,6 +3,7 @@ package com.wonokoyo.budidaya.room.repo;
 import android.app.Application;
 import android.os.AsyncTask;
 
+import com.wonokoyo.budidaya.model.Real;
 import com.wonokoyo.budidaya.model.Tara;
 import com.wonokoyo.budidaya.model.Weigh;
 import com.wonokoyo.budidaya.room.BdyDatabase;
@@ -30,6 +31,26 @@ public class FlowRepo {
             @Override
             protected Void doInBackground(Void... voids) {
                 flowDao.insert(weigh);
+                return null;
+            }
+        }.execute();
+    }
+
+    public void saveReal(final Real real) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                flowDao.insert(real);
+                return null;
+            }
+        }.execute();
+    }
+
+    public void updateReal(final Real real) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                flowDao.update(real);
                 return null;
             }
         }.execute();

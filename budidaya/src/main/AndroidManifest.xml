@@ -5,16 +5,17 @@
 	<application
 		android:requestLegacyExternalStorage="true"
 		android:usesCleartextTraffic="true">
-		<activity android:name=".flow.WeighActivity"></activity>
+		<activity android:name=".flow.ResultActivity"></activity>
+		<activity android:name=".flow.WeighActivity" />
 		<activity android:name=".flow.TaraActivity" />
 		<activity android:name=".flow.ScanActivity" />
 		<activity android:name=".flow.PlanActivity" />
 		<activity android:name=".BudidayaActivity" />
 	</application>
-	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+	<uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

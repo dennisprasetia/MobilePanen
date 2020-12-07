@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.wonokoyo.budidaya.R;
+import com.wonokoyo.budidaya.helper.TimePref;
 import com.wonokoyo.budidaya.model.Plan;
 import com.wonokoyo.budidaya.model.Tara;
 import com.wonokoyo.budidaya.model.Weigh;
@@ -18,6 +19,10 @@ import com.wonokoyo.budidaya.model.viewmodel.FlowViewModel;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class WeighActivity extends AppCompatActivity {
     // variable socket timbangan
@@ -32,17 +37,24 @@ public class WeighActivity extends AppCompatActivity {
     private TextView tvTara;
     private TextView tvLeft;
     private TextView tvTonase;
+    private TextView tvBb;
     private Button btnSave;
     private Button btnRefresh;
     private Button btnNext;
 
     private int count;
     private int tails;
+    private int quan;
     private double tonase;
+    private double total_nett;
 
     private Plan plan;
 
+    private List<Weigh> weighs;
+
     FlowViewModel flowViewModel;
+
+    TimePref timePref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +62,11 @@ public class WeighActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_weigh);
 
+        timePref = new TimePref(this);
+
         Intent intent = getIntent();
         plan = (Plan) intent.getSerializableExtra("plan");
+        weighs = new ArrayList<>();
 
         flowViewModel = new FlowViewModel();
         flowViewModel.init(getApplication());
@@ -71,14 +86,27 @@ public class WeighActivity extends AppCompatActivity {
         tvTonase.setText(String.valueOf(plan.getBerat()));
         tonase = plan.getBerat();
 
+        tvBb = findViewById(R.id.value_bb);
+
         count = 1;
+        quan = 0;
+        total_nett = 0.0;
         tvSeq.setText(String.valueOf(count));
 
         btnSave = findViewById(R.id.btnSimpanWeigh);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                plan.setWeighs(weighs);
 
+                // SET JAM SELESAI PANEN
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String time = sdf.format(new Date());
+                timePref.saveSPString(TimePref.TM_SELESAI, time);
+
+                Intent result = new Intent(WeighActivity.this, ResultActivity.class);
+                result.putExtra("plan", plan);
+                startActivity(result);
             }
         });
 
@@ -105,6 +133,8 @@ public class WeighActivity extends AppCompatActivity {
                 weigh.setBerat(Double.valueOf(etValue.getText().toString()));
                 weigh.setEkor(Integer.valueOf(etQuan.getText().toString()));
 
+                weighs.add(weigh);
+
                 flowViewModel.saveWeigh(weigh);
                 calcAndReset();
             }
@@ -126,12 +156,17 @@ public class WeighActivity extends AppCompatActivity {
 
     public void calcAndReset() {
         // CALCULATE
+        quan += Integer.valueOf(etQuan.getText().toString());
         tails = tails - Integer.valueOf(etQuan.getText().toString());
         tvLeft.setText(String.valueOf(tails));
 
         double nett = Double.valueOf(etValue.getText().toString()) - Double.valueOf(tvTara.getText().toString());
         tonase = tonase - nett;
+        total_nett += nett;
         tvTonase.setText(String.format("%.2f", tonase));
+
+        double bb = total_nett / quan;
+        tvBb.setText(String.format("%.2f", bb));
 
         // RESET
         count++;

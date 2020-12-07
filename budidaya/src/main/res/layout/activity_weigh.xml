@@ -141,7 +141,7 @@
 						android:orientation="horizontal"
 						android:paddingHorizontal="10dp">
 						<TextView
-							android:layout_width="100dp"
+							android:layout_width="80dp"
 							android:layout_height="wrap_content"
 							android:layout_marginEnd="5dp"
 							android:text="Nilai Tara" />
@@ -151,14 +151,14 @@
 							android:layout_height="wrap_content"
 							android:text="" />
 					</LinearLayout>
+
 					<LinearLayout
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:orientation="horizontal"
-						android:gravity="center_vertical"
 						android:paddingHorizontal="10dp">
 						<TextView
-							android:layout_width="100dp"
+							android:layout_width="80dp"
 							android:layout_height="wrap_content"
 							android:layout_marginEnd="5dp"
 							android:text="Ekor" />
@@ -170,7 +170,7 @@
 							android:text="" />
 
 						<TextView
-							android:layout_width="100dp"
+							android:layout_width="80dp"
 							android:layout_height="wrap_content"
 							android:layout_marginEnd="5dp"
 							android:text="Tonase" />
@@ -179,6 +179,23 @@
 							android:layout_width="60dp"
 							android:layout_height="wrap_content"
 							android:text="" />
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:paddingHorizontal="10dp">
+						<TextView
+							android:layout_width="80dp"
+							android:layout_height="wrap_content"
+							android:layout_marginEnd="5dp"
+							android:text="BB"/>
+						<TextView
+							android:id="@+id/value_bb"
+							android:layout_width="60dp"
+							android:layout_height="wrap_content"
+							android:text=""/>
 					</LinearLayout>
 				</LinearLayout>
 			</androidx.cardview.widget.CardView>

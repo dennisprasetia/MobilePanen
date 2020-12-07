@@ -1,17 +1,21 @@
 package com.wonokoyo.budidaya.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity(tableName = "real")
 public class Real implements Serializable {
     @PrimaryKey
     @SerializedName("do")
+    @NonNull
     @Expose
     private String no_do;
 
@@ -70,6 +74,12 @@ public class Real implements Serializable {
     @SerializedName("status")
     @Expose
     private int status;
+
+    @Ignore
+    private List<Tara> taras;
+
+    @Ignore
+    private List<Weigh> weighs;
 
     public String getNo_do() {
         return no_do;
@@ -189,5 +199,21 @@ public class Real implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public List<Tara> getTaras() {
+        return taras;
+    }
+
+    public void setTaras(List<Tara> taras) {
+        this.taras = taras;
+    }
+
+    public List<Weigh> getWeighs() {
+        return weighs;
+    }
+
+    public void setWeighs(List<Weigh> weighs) {
+        this.weighs = weighs;
     }
 }
