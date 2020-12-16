@@ -85,7 +85,7 @@ public class ResultActivity extends AppCompatActivity {
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
             }
         });
 
@@ -137,10 +137,13 @@ public class ResultActivity extends AppCompatActivity {
         real.setKandang(plan.getKandang());
         real.setMitra(plan.getMitra());
         real.setBruto(bruto);
-        real.setTara_tandu(total_tandu);
+        real.setTara_tandu(Double.valueOf(tara_avg));
+        real.setTotal_tandu(total_tandu);
         real.setNetto(netto);
         real.setMulai_panen(timePref.getMulai());
         real.setSelesai_panen(timePref.getSelesai());
+        real.setTaras(plan.getTaras());
+        real.setWeighs(plan.getWeighs());
         real.setStatus(0);
 
         flowViewModel.saveReal(real);

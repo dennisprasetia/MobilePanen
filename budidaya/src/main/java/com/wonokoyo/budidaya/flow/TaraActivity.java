@@ -18,6 +18,7 @@ import com.wonokoyo.budidaya.model.viewmodel.FlowViewModel;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,20 +95,23 @@ public class TaraActivity extends AppCompatActivity {
             public void run() {
                 try {
                     Socket socket = new Socket(SERVER_IP, SERVERPORT);
-                    BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    final String response = in.readLine();
+                    if (socket.isConnected()) {
+                        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                        final String response = in.readLine();
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (response != null) {
-                                String[] split = response.split(" ");
-                                etValue.setText(split[split.length - 2]);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (response != null) {
+                                    String[] split = response.split(" ");
+                                    etValue.setText(split[split.length - 2]);
+                                }
                             }
-                        }
-                    });
-
+                        });
+                    }
                     socket.close();
+                } catch (SocketTimeoutException e) {
+                    e.printStackTrace();
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
@@ -142,9 +146,13 @@ public class TaraActivity extends AppCompatActivity {
         } else {
             plan.setTaras(taras);
 
+            if (threadReceive.isAlive())
+                threadReceive.interrupt();
+
             Intent intent = new Intent(TaraActivity.this, WeighActivity.class);
             intent.putExtra("plan", plan);
             startActivity(intent);
+            finish();
         }
     }
 }

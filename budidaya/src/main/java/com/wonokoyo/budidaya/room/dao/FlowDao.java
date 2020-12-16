@@ -9,6 +9,7 @@ import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.wonokoyo.budidaya.model.Real;
+import com.wonokoyo.budidaya.model.RealWithDetail;
 import com.wonokoyo.budidaya.model.Tara;
 import com.wonokoyo.budidaya.model.Weigh;
 
@@ -33,6 +34,18 @@ public interface FlowDao {
     void update(Real real);
 
     @Transaction
+    @Update
+    void update(List<Real> reals);
+
+    @Transaction
     @Query("SELECT * FROM tara WHERE rit = :rit AND tgl_tara = :tgl_tara")
     LiveData<List<Tara>> getTaraByRitAndTgl(String rit, String tgl_tara);
+
+    @Transaction
+    @Query("SELECT * FROM real WHERE status = 0")
+    LiveData<List<RealWithDetail>> getAllReal();
+
+    @Transaction
+    @Query("SELECT COUNT(*) FROM real WHERE status = 0")
+    LiveData<Integer> getRealCount();
 }

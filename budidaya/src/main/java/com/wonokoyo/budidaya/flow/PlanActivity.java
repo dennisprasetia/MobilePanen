@@ -39,7 +39,7 @@ public class PlanActivity extends AppCompatActivity {
         String start = sdf.format(new Date());
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -1);
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
         Date tomorrow = calendar.getTime();
         String end = sdf.format(tomorrow);
 
@@ -48,7 +48,7 @@ public class PlanActivity extends AppCompatActivity {
         rvDo = findViewById(R.id.rv_list_do);
         rvDo.setAdapter(adapter);
 
-        planViewModel.listDataPlan(end, start).observe(this, new Observer<List<Plan>>() {
+        planViewModel.listDataPlan(start, end).observe(this, new Observer<List<Plan>>() {
             @Override
             public void onChanged(List<Plan> plans) {
                 if (plans.size() > 0) {

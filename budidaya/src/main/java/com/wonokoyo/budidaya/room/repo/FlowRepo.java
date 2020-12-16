@@ -3,11 +3,16 @@ package com.wonokoyo.budidaya.room.repo;
 import android.app.Application;
 import android.os.AsyncTask;
 
+import androidx.lifecycle.LiveData;
+
 import com.wonokoyo.budidaya.model.Real;
+import com.wonokoyo.budidaya.model.RealWithDetail;
 import com.wonokoyo.budidaya.model.Tara;
 import com.wonokoyo.budidaya.model.Weigh;
 import com.wonokoyo.budidaya.room.BdyDatabase;
 import com.wonokoyo.budidaya.room.dao.FlowDao;
+
+import java.util.List;
 
 public class FlowRepo {
     private FlowDao flowDao;
@@ -54,5 +59,19 @@ public class FlowRepo {
                 return null;
             }
         }.execute();
+    }
+
+    public void updateAllReal(final List<Real> reals) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                flowDao.update(reals);
+                return null;
+            }
+        }.execute();
+    }
+
+    public LiveData<List<RealWithDetail>> getAllReal() {
+        return flowDao.getAllReal();
     }
 }

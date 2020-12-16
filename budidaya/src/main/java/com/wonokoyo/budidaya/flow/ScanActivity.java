@@ -91,6 +91,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
                     Intent intent = new Intent(ScanActivity.this, TaraActivity.class);
                     intent.putExtra("plan", plan);
                     startActivity(intent);
+                    finish();
                 } else {
                     Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.plan_not_found),
                             Toast.LENGTH_SHORT);

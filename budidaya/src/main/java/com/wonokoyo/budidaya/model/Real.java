@@ -76,9 +76,13 @@ public class Real implements Serializable {
     private int status;
 
     @Ignore
+    @SerializedName("taras")
+    @Expose
     private List<Tara> taras;
 
     @Ignore
+    @SerializedName("weighs")
+    @Expose
     private List<Weigh> weighs;
 
     public String getNo_do() {

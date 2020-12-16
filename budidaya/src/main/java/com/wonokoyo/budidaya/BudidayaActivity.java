@@ -2,18 +2,21 @@ package com.wonokoyo.budidaya;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.wonokoyo.budidaya.flow.PlanActivity;
 import com.wonokoyo.budidaya.flow.ScanActivity;
+import com.wonokoyo.budidaya.model.RealWithDetail;
+import com.wonokoyo.budidaya.model.viewmodel.FlowViewModel;
 import com.wonokoyo.budidaya.model.viewmodel.PlanViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class BudidayaActivity extends AppCompatActivity {
 
@@ -25,6 +28,7 @@ public class BudidayaActivity extends AppCompatActivity {
     View view;
 
     PlanViewModel planViewModel;
+    FlowViewModel flowViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,10 @@ public class BudidayaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_budidaya);
 
         planViewModel = new PlanViewModel();
+        planViewModel.init(getApplication());
+
+        flowViewModel = new FlowViewModel();
+        flowViewModel.init(getApplication());
 
         view = findViewById(R.id.menu_bdy);
 
@@ -44,12 +52,11 @@ public class BudidayaActivity extends AppCompatActivity {
                 String start = sdf.format(new Date());
 
                 Calendar calendar = Calendar.getInstance();
-                calendar.add(Calendar.DAY_OF_YEAR, -1);
+                calendar.add(Calendar.DAY_OF_YEAR, 1);
                 Date tomorrow = calendar.getTime();
                 String end = sdf.format(tomorrow);
 
-                planViewModel.init(getApplication());
-                planViewModel.syncPlan(end, start, view);
+                planViewModel.syncPlan(start, end, view);
             }
         });
 
@@ -61,5 +68,23 @@ public class BudidayaActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        cvSend = findViewById(R.id.cvSend);
+        cvSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flowViewModel.getAllReal().observe(BudidayaActivity.this, new Observer<List<RealWithDetail>>() {
+                    @Override
+                    public void onChanged(List<RealWithDetail> reals) {
+                        flowViewModel.upload(reals);
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

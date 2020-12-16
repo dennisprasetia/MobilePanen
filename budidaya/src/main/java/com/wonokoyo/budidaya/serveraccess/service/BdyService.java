@@ -13,4 +13,7 @@ import retrofit2.http.Query;
 public interface BdyService {
     @GET(Url.GET_PLAN)
     Call<ResponseBody> getPlanByDate(@Query("start") String start, @Query("end") String end);
+
+    @GET(Url.SAVE_DATA)
+    Call<ResponseBody> saveDataReal(@Query("data") String data);
 }

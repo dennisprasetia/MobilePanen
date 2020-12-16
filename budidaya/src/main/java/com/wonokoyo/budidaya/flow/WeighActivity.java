@@ -99,6 +99,9 @@ public class WeighActivity extends AppCompatActivity {
             public void onClick(View v) {
                 plan.setWeighs(weighs);
 
+                if (threadReceive.isAlive())
+                    threadReceive.interrupt();
+
                 // SET JAM SELESAI PANEN
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String time = sdf.format(new Date());
@@ -107,6 +110,7 @@ public class WeighActivity extends AppCompatActivity {
                 Intent result = new Intent(WeighActivity.this, ResultActivity.class);
                 result.putExtra("plan", plan);
                 startActivity(result);
+                finish();
             }
         });
 

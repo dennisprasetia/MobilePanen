@@ -32,10 +32,11 @@ public interface PlanDao {
     void delete(Plan plan);
 
     @Transaction
-    @Query("SELECT * FROM `plan` WHERE tgl_panen BETWEEN :start AND :end")
+    @Query("SELECT * FROM `plan` WHERE no_do NOT IN (SELECT no_do FROM real) AND tgl_panen BETWEEN :start AND :end")
     LiveData<List<Plan>> getPlansByDate(String start, String end);
 
     @Transaction
-    @Query("SELECT * FROM `plan` WHERE no_sj = :no_dosj OR no_do = :no_dosj")
+    @Query("SELECT * FROM `plan` WHERE no_sj = :no_dosj AND no_sj NOT IN (SELECT no_sj FROM real) OR no_do = :no_dosj" +
+            " AND no_do NOT IN (SELECT no_do FROM real)")
     LiveData<Plan> getPlanByDoSj(String no_dosj);
 }
