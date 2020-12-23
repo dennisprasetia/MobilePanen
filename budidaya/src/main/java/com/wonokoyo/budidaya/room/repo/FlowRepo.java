@@ -74,4 +74,8 @@ public class FlowRepo {
     public LiveData<List<RealWithDetail>> getAllReal() {
         return flowDao.getAllReal();
     }
+
+    public LiveData<Integer> countReal() {
+        return flowDao.getRealCount();
+    }
 }

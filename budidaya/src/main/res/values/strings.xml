@@ -1,4 +1,8 @@
 <resources>
 	<string name="plan_not_found">DO/SJ tidak ditemukan</string>
 	<string name="camera_denied">Harap pasang perijinan Camera</string>
+	<string name="detail_plan">Untuk melihat rencana panen hari ini</string>
+	<string name="detail_start">Untuk lakukan kegiatan panen ayam</string>
+	<string name="detail_real">Untuk melihat hasil panen hari ini</string>
+	<string name="detail_send">Untuk mengirim data ke Kantor Pusat</string>
 </resources>

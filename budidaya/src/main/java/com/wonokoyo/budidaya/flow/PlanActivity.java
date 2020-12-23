@@ -33,7 +33,7 @@ public class PlanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_plan);
 
         planViewModel = new PlanViewModel();
-        planViewModel.init(getApplication());
+        planViewModel.init(getApplication(), PlanActivity.this);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String start = sdf.format(new Date());

@@ -53,6 +53,10 @@ public class FlowViewModel {
         flowRepo.updateReal(real);
     }
 
+    public LiveData<Integer> getCountReal() {
+        return flowRepo.countReal();
+    }
+
     public LiveData<List<RealWithDetail>> getAllReal() {
         return flowRepo.getAllReal();
     }

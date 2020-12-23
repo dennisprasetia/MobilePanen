@@ -55,4 +55,8 @@ public class PlanRepo {
     public LiveData<Plan> getPlanByDoSj(String no_dosj) {
         return planDao.getPlanByDoSj(no_dosj);
     }
+
+    public LiveData<Integer> countPlan(String start, String end) {
+        return planDao.getCountPlan(start, end);
+    }
 }

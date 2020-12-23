@@ -39,4 +39,9 @@ public interface PlanDao {
     @Query("SELECT * FROM `plan` WHERE no_sj = :no_dosj AND no_sj NOT IN (SELECT no_sj FROM real) OR no_do = :no_dosj" +
             " AND no_do NOT IN (SELECT no_do FROM real)")
     LiveData<Plan> getPlanByDoSj(String no_dosj);
+
+    @Transaction
+    @Query("SELECT COUNT(*) as quantity FROM `plan` WHERE no_do NOT IN (SELECT no_do FROM real) AND tgl_panen BETWEEN " +
+            ":start AND :end")
+    LiveData<Integer> getCountPlan(String start, String end);
 }

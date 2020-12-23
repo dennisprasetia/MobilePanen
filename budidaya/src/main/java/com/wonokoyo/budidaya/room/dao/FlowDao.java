@@ -46,6 +46,6 @@ public interface FlowDao {
     LiveData<List<RealWithDetail>> getAllReal();
 
     @Transaction
-    @Query("SELECT COUNT(*) FROM real WHERE status = 0")
+    @Query("SELECT COUNT(*) as quantity FROM real WHERE status = 0")
     LiveData<Integer> getRealCount();
 }

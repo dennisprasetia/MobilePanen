@@ -42,7 +42,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         timePref = new TimePref(this);
 
         planViewModel = new PlanViewModel();
-        planViewModel.init(getApplication());
+        planViewModel.init(getApplication(), ScanActivity.this);
 
         mScannerView = new ZXingScannerView(this);
         frameLayout = findViewById(R.id.flScanner);

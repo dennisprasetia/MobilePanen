@@ -1,6 +1,8 @@
 package com.wonokoyo.budidaya.model.viewmodel;
 
 import android.app.Application;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
@@ -9,7 +11,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
-import com.wonokoyo.budidaya.BudidayaActivity;
 import com.wonokoyo.budidaya.flow.PlanActivity;
 import com.wonokoyo.budidaya.model.Plan;
 import com.wonokoyo.budidaya.model.repository.PlanRepository;
@@ -20,8 +21,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -34,14 +38,42 @@ public class PlanViewModel {
     private PlanRepo planRepo;
     private Application app;
 
-    public void init(Application application) {
+    private ProgressDialog dialog;
+
+    public void init(Application application, Context context) {
         planRepository = PlanRepository.getInstance();
         planRepo = new PlanRepo(application);
 
         this.app = application;
+
+        dialog = new ProgressDialog(context);
+        dialog.setMessage("Sedang memuat data");
+        dialog.setCancelable(false);
     }
 
-    public void syncPlan(String start, String end, final View view) {
+    public LiveData<Integer> getCountPlan() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String start = sdf.format(new Date());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+        String end = sdf.format(tomorrow);
+
+        return planRepo.countPlan(start, end);
+    }
+
+    public void syncPlan(final View view) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String start = sdf.format(new Date());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+        String end = sdf.format(tomorrow);
+
+        dialog.show();
+
         Callback<ResponseBody> listener = new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -51,6 +83,9 @@ public class PlanViewModel {
                         JSONObject jsonObject = new JSONObject(body.string());
                         int status = jsonObject.getInt("status");
                         String message = jsonObject.getString("message");
+
+                        if (dialog.isShowing())
+                            dialog.dismiss();
 
                         if (status == 1) {
                             JSONArray jsonArray = jsonObject.getJSONArray("content");
