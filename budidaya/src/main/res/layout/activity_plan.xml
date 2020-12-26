@@ -33,4 +33,16 @@
 		android:background="@color/cardview_dark_background"
 		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
+	<TextView
+		android:id="@+id/tvAlertPlan"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		android:text="@string/data_plan_empty"
+		android:textSize="18sp"
+		android:textColor="@color/cardview_light_background"
+		android:textAllCaps="true"
+		android:gravity="center"
+		android:visibility="gone"/>
+
 </RelativeLayout>

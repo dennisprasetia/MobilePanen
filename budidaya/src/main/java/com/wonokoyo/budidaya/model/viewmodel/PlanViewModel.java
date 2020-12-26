@@ -120,7 +120,15 @@ public class PlanViewModel {
         planRepository.getPlansByDate(start, end, listener);
     }
 
-    public LiveData<List<Plan>> listDataPlan(String start, String end) {
+    public LiveData<List<Plan>> listDataPlan() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String start = sdf.format(new Date());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+        String end = sdf.format(tomorrow);
+
         return planRepo.getPlans(start, end);
     }
 

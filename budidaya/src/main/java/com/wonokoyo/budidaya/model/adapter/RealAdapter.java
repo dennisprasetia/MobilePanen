@@ -13,45 +13,46 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.wonokoyo.budidaya.R;
 import com.wonokoyo.budidaya.helper.CustomDialog;
-import com.wonokoyo.budidaya.model.Plan;
+import com.wonokoyo.budidaya.model.Real;
+import com.wonokoyo.budidaya.model.RealWithDetail;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.PlanAdapterHolder> {
+public class RealAdapter extends RecyclerView.Adapter<RealAdapter.RealAdapterHolder> {
 
-    private List<Plan> data;
+    private List<RealWithDetail> data;
     private Context context;
 
-    public PlanAdapter(Context context) {
-        this.context = context;
+    public RealAdapter(Context context) {
         this.data = new ArrayList<>();
+        this.context = context;
     }
 
     @NonNull
     @Override
-    public PlanAdapterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RealAdapterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.card_do, parent, false);
-        return new PlanAdapterHolder(view);
+        return new RealAdapter.RealAdapterHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlanAdapterHolder holder, int position) {
-        final Plan plan = data.get(position);
+    public void onBindViewHolder(@NonNull RealAdapterHolder holder, final int position) {
+        Real real = data.get(position).getReal();
 
-        holder.cvPlan.setOnClickListener(new View.OnClickListener() {
+        holder.cvReal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CustomDialog dialog = new CustomDialog();
-                dialog.initDialogDetailPlan(context, plan, (WindowManager) context.getSystemService(Context.WINDOW_SERVICE));
+                dialog.initDialogDetailReal(context, data.get(position), (WindowManager) context.getSystemService(Context.WINDOW_SERVICE));
             }
         });
-        holder.tvRit.setText(plan.getRit());
-        holder.tvDo.setText(plan.getNo_do());
-        holder.tvSj.setText(plan.getNo_sj());
-        holder.tvMitra.setText(plan.getMitra());
-        holder.tvKandang.setText(plan.getKandang());
+        holder.tvRit.setText(real.getRit());
+        holder.tvDo.setText(real.getNo_do());
+        holder.tvSj.setText(real.getNo_sj());
+        holder.tvMitra.setText(real.getMitra());
+        holder.tvKandang.setText(real.getKandang());
     }
 
     @Override
@@ -59,23 +60,23 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.PlanAdapterHol
         return data.size();
     }
 
-    public void updateData(List<Plan> data) {
+    public void updateData(List<RealWithDetail> data) {
         this.data = data;
         this.notifyDataSetChanged();
     }
 
-    public class PlanAdapterHolder extends RecyclerView.ViewHolder {
-        private CardView cvPlan;
+    public class RealAdapterHolder extends RecyclerView.ViewHolder {
+        private CardView cvReal;
         private TextView tvRit;
         private TextView tvDo;
         private TextView tvSj;
         private TextView tvMitra;
         private TextView tvKandang;
 
-        public PlanAdapterHolder(View view) {
+        public RealAdapterHolder(View view) {
             super(view);
 
-            cvPlan = view.findViewById(R.id.cv_do);
+            cvReal = view.findViewById(R.id.cv_do);
             tvRit = view.findViewById(R.id.tvRit);
             tvDo = view.findViewById(R.id.tvDo);
             tvSj = view.findViewById(R.id.tvSj);

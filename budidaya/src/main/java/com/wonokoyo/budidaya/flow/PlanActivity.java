@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.wonokoyo.budidaya.R;
 import com.wonokoyo.budidaya.model.Plan;
@@ -20,6 +21,7 @@ import java.util.List;
 
 public class PlanActivity extends AppCompatActivity {
 
+    private TextView tvAlert;
     private RecyclerView rvDo;
 
     private PlanAdapter adapter;
@@ -35,24 +37,20 @@ public class PlanActivity extends AppCompatActivity {
         planViewModel = new PlanViewModel();
         planViewModel.init(getApplication(), PlanActivity.this);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String start = sdf.format(new Date());
+        adapter = new PlanAdapter(PlanActivity.this);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
-        Date tomorrow = calendar.getTime();
-        String end = sdf.format(tomorrow);
-
-        adapter = new PlanAdapter();
+        tvAlert = findViewById(R.id.tvAlertPlan);
 
         rvDo = findViewById(R.id.rv_list_do);
         rvDo.setAdapter(adapter);
 
-        planViewModel.listDataPlan(start, end).observe(this, new Observer<List<Plan>>() {
+        planViewModel.listDataPlan().observe(this, new Observer<List<Plan>>() {
             @Override
             public void onChanged(List<Plan> plans) {
                 if (plans.size() > 0) {
                     adapter.updateData(plans);
+                } else {
+                    tvAlert.setVisibility(View.VISIBLE);
                 }
             }
         });

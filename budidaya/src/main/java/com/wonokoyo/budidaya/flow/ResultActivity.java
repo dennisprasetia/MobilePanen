@@ -124,7 +124,7 @@ public class ResultActivity extends AppCompatActivity {
         double bb_avg = netto / quan;
 
         tvBruto.setText(String.format("%.2f", bruto));
-        tvTara.setText(tara_avg);
+        tvTara.setText(String.format("%.2f", total_tandu));
         tvNetto.setText(String.format("%.2f", netto));
         tvEkor.setText(String.valueOf(quan));
         tvBb.setText(String.format("%.2f", bb_avg));
@@ -139,7 +139,9 @@ public class ResultActivity extends AppCompatActivity {
         real.setBruto(bruto);
         real.setTara_tandu(Double.valueOf(tara_avg));
         real.setTotal_tandu(total_tandu);
+        real.setBb(bb_avg);
         real.setNetto(netto);
+        real.setEkor(quan);
         real.setMulai_panen(timePref.getMulai());
         real.setSelesai_panen(timePref.getSelesai());
         real.setTaras(plan.getTaras());

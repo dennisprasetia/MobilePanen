@@ -5,4 +5,6 @@
 	<string name="detail_start">Untuk lakukan kegiatan panen ayam</string>
 	<string name="detail_real">Untuk melihat hasil panen hari ini</string>
 	<string name="detail_send">Untuk mengirim data ke Kantor Pusat</string>
+	<string name="data_real_empty">Tidak Ada Data Realisasi Hari Ini</string>
+	<string name="data_plan_empty">Tidak Ada Data DO Panen Hari Ini</string>
 </resources>

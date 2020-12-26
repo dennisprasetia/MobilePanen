@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:paddingHorizontal="16dp"
+	android:paddingBottom="16dp"
+	android:orientation="vertical">
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingVertical="5dp"
+		android:text="Detail Realisasi"
+		android:textSize="22sp"
+		android:textAllCaps="true"
+		android:textStyle="bold"
+		android:gravity="center"/>
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+			<!--NO DO-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="No DO :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_real_do"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp" />
+
+			<!--NO SJ-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="No SJ :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_real_sj"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--RIT-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Rit :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_real_rit"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--JAM MULAI-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Jam Mulai :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_real_start"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--JAM SELESAI-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Jam Selesai :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_real_end"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--BB RATA-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="BB rata-rata :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_real_bb"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--NETTO-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Netto :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_real_netto"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--JUMLAH EKOR-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Jumlah Ekor :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_real_quan"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--BRUTO-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Bruto :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_real_bruto"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--TARA RATA-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Tara :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_real_tara"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--TOTAL TARA-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Total Tara :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_real_total"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--DETAIL TIMBANG TARA-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Detail Tara :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/rv_det_list_tara"
+				android:layout_width="match_parent"
+				android:layout_height="125dp"
+				android:layout_marginBottom="8dp"
+				android:background="@color/viewfinder_mask"
+				app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Detail Timbang :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/rv_det_list_weigh"
+				android:layout_width="match_parent"
+				android:layout_height="175dp"
+				android:background="@color/viewfinder_mask"
+				app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>

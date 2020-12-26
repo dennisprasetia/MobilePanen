@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:paddingHorizontal="16dp"
+	android:orientation="vertical">
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingVertical="5dp"
+		android:text="Detail Informasi DO"
+		android:textSize="22sp"
+		android:textAllCaps="true"
+		android:textStyle="bold"
+		android:gravity="center"/>
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+			<!--NO DO-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="No DO :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_plan_do"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp" />
+
+			<!--NO SJ-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="No SJ :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_plan_sj"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--RIT-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Rit :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_plan_rit"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--TONASE-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Tonase :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_plan_tonnage"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--JUMLAH EKOR-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Jumlah Ekor :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_plan_quan"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--JAM BERANGKAT-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Jam Berangkat :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_plan_depart"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--JAM TIBA FARM-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Jam Tiba Farm :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_plan_arrive_farm"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--JAM MULAI-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Jam Mulai Panen :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_plan_start"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--JAM SELESAI-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Jam Selesai Panen :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_plan_end"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--JAM TIBA RPA-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Jam Tiba RPA :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_plan_arrive_rpa"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
+			<!--JAM POTONG-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Jam Potong :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_plan_slice_time"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>
