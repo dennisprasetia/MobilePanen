@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.wonokoyo.budidaya.flow.RealActivity;
 import com.wonokoyo.budidaya.flow.ScanActivity;
 import com.wonokoyo.budidaya.model.RealWithDetail;
@@ -44,7 +45,7 @@ public class BudidayaActivity extends AppCompatActivity {
         planViewModel.init(getApplication(), BudidayaActivity.this);
 
         flowViewModel = new FlowViewModel();
-        flowViewModel.init(getApplication());
+        flowViewModel.init(getApplication(), BudidayaActivity.this);
 
         view = findViewById(R.id.menu_bdy);
 
@@ -98,7 +99,20 @@ public class BudidayaActivity extends AppCompatActivity {
                 flowViewModel.getAllReal().observe(BudidayaActivity.this, new Observer<List<RealWithDetail>>() {
                     @Override
                     public void onChanged(List<RealWithDetail> reals) {
-                        flowViewModel.upload(reals);
+                        if (reals.size() > 0) {
+                            flowViewModel.upload(reals);
+                            flowViewModel.getAllReal().removeObservers(BudidayaActivity.this);
+                        } else {
+                            Snackbar snackbar = Snackbar.make(view, getString(R.string.data_empty),
+                                    Snackbar.LENGTH_INDEFINITE);
+                            snackbar.setAction("OK", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                }
+                            });
+                            snackbar.show();
+                        }
                     }
                 });
             }

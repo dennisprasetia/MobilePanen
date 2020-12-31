@@ -69,7 +69,7 @@ public class WeighActivity extends AppCompatActivity {
         weighs = new ArrayList<>();
 
         flowViewModel = new FlowViewModel();
-        flowViewModel.init(getApplication());
+        flowViewModel.init(getApplication(), WeighActivity.this);
 
         tvSeq = findViewById(R.id.value_seq);
         etValue = findViewById(R.id.value_weigh);

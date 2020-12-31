@@ -52,7 +52,7 @@ public class ResultActivity extends AppCompatActivity {
         timePref = new TimePref(this);
 
         flowViewModel = new FlowViewModel();
-        flowViewModel.init(getApplication());
+        flowViewModel.init(getApplication(), ResultActivity.this);
 
         tvDo = findViewById(R.id.no_do);
         tvDo.setText(plan.getNo_do());
@@ -123,9 +123,9 @@ public class ResultActivity extends AppCompatActivity {
 
         double bb_avg = netto / quan;
 
-        tvBruto.setText(String.format("%.2f", bruto));
-        tvTara.setText(String.format("%.2f", total_tandu));
-        tvNetto.setText(String.format("%.2f", netto));
+        tvBruto.setText(String.format("%.1f", bruto));
+        tvTara.setText(String.format("%.1f", total_tandu));
+        tvNetto.setText(String.format("%.1f", netto));
         tvEkor.setText(String.valueOf(quan));
         tvBb.setText(String.format("%.2f", bb_avg));
 

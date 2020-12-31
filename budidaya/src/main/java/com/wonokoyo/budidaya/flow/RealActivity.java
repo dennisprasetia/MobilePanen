@@ -32,7 +32,7 @@ public class RealActivity extends AppCompatActivity {
         setContentView(R.layout.activity_real);
 
         flowViewModel = new FlowViewModel();
-        flowViewModel.init(getApplication());
+        flowViewModel.init(getApplication(), RealActivity.this);
 
         adapter = new RealAdapter(RealActivity.this);
 

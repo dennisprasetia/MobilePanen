@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.wonokoyo.mobilepanen.helper.SharedPrefManager;
 import com.wonokoyo.mobilepanen.serveraccess.RetrofitInstance;
 import com.wonokoyo.mobilepanen.util.BiometricCallback;
 import com.wonokoyo.mobilepanen.util.BiometricManager;
@@ -47,6 +48,8 @@ public class LoginActivity extends AppCompatActivity implements BiometricCallbac
 
     TelephonyManager manager;
 
+    SharedPrefManager spManager;
+
     View view;
 
     private String idUser, namaUser, message;
@@ -63,6 +66,8 @@ public class LoginActivity extends AppCompatActivity implements BiometricCallbac
         etPassword = findViewById(R.id.password);
 
         manager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+
+        spManager = new SharedPrefManager(this);
 
         requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.INTERNET}, 200);
@@ -108,6 +113,8 @@ public class LoginActivity extends AppCompatActivity implements BiometricCallbac
                 startActivity(intent);
             }
         });
+
+        skipLogin();
     }
 
     @Override
@@ -194,6 +201,10 @@ public class LoginActivity extends AppCompatActivity implements BiometricCallbac
                             idUser = jsonObject.getString("id");
                             namaUser = jsonObject.getString("name");
 
+                            spManager.saveSPString(SharedPrefManager.SP_USER, idUser);
+                            spManager.saveSPString(SharedPrefManager.SP_NAME, namaUser);
+                            spManager.saveSPBoolean(SharedPrefManager.SP_LOGIN, true);
+
                             resultLogin(true);
                         } else {
                             idUser = "";
@@ -232,6 +243,16 @@ public class LoginActivity extends AppCompatActivity implements BiometricCallbac
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             intent.putExtra("id", idUser);
             intent.putExtra("name", namaUser);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    public void skipLogin() {
+        if (spManager.getLogin()) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.putExtra("id", spManager.getUser());
+            intent.putExtra("name", spManager.getName());
             startActivity(intent);
             finish();
         }

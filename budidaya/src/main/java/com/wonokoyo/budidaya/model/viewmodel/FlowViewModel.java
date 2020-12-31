@@ -1,6 +1,8 @@
 package com.wonokoyo.budidaya.model.viewmodel;
 
 import android.app.Application;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
@@ -30,11 +32,17 @@ public class FlowViewModel {
     private FlowRepo flowRepo;
     private Application app;
 
-    public void init(Application application) {
+    private ProgressDialog dialog;
+
+    public void init(Application application, Context context) {
         realRepository = new RealRepository();
         flowRepo = new FlowRepo(application);
 
         this.app = application;
+
+        dialog = new ProgressDialog(context);
+        dialog.setMessage("Sedang memuat data");
+        dialog.setCancelable(false);
     }
 
     public void saveTara(Tara tara) {
@@ -62,6 +70,8 @@ public class FlowViewModel {
     }
 
     public void upload(final List<RealWithDetail> reals) {
+        dialog.show();
+
         Callback<ResponseBody> listener = new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -71,6 +81,9 @@ public class FlowViewModel {
                         JSONObject jsonObject = new JSONObject(body.string());
                         int status = jsonObject.getInt("status");
                         String message = jsonObject.getString("message");
+
+                        if (dialog.isShowing())
+                            dialog.dismiss();
 
                         Log.d("CEK DATA", jsonObject.toString());
 

@@ -52,7 +52,7 @@ public class TaraActivity extends AppCompatActivity {
         count = 0;
 
         flowViewModel = new FlowViewModel();
-        flowViewModel.init(getApplication());
+        flowViewModel.init(getApplication(), TaraActivity.this);
 
         adapter = new TaraAdapter();
 
