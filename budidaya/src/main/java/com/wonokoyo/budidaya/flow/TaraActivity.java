@@ -21,6 +21,8 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TaraActivity extends AppCompatActivity {
     // variable socket timbangan
@@ -103,8 +105,11 @@ public class TaraActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 if (response != null) {
-                                    String[] split = response.split(" ");
-                                    etValue.setText(split[split.length - 2]);
+                                    Pattern pattern = Pattern.compile("[0-9]+\\.[0-9]");
+                                    Matcher matcher = pattern.matcher(response);
+
+                                    if (matcher.find())
+                                        etValue.setText(matcher.group());
                                 }
                             }
                         });

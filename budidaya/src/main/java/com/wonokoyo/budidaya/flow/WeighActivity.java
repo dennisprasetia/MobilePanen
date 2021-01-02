@@ -19,10 +19,13 @@ import com.wonokoyo.budidaya.model.viewmodel.FlowViewModel;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WeighActivity extends AppCompatActivity {
     // variable socket timbangan
@@ -192,20 +195,26 @@ public class WeighActivity extends AppCompatActivity {
             public void run() {
                 try {
                     Socket socket = new Socket(SERVER_IP, SERVERPORT);
-                    BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    final String response = in.readLine();
+                    if (socket.isConnected()) {
+                        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                        final String response = in.readLine();
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (response != null) {
-                                String[] split = response.split(" ");
-                                etValue.setText(split[split.length - 2]);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (response != null) {
+                                    Pattern pattern = Pattern.compile("[0-9]+\\.[0-9]");
+                                    Matcher matcher = pattern.matcher(response);
+
+                                    if (matcher.find())
+                                        etValue.setText(matcher.group());
+                                }
                             }
-                        }
-                    });
-
+                        });
+                    }
                     socket.close();
+                } catch (SocketTimeoutException e) {
+                    e.printStackTrace();
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
