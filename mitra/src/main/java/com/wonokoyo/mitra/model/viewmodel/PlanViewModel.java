@@ -1,4 +1,4 @@
-package com.wonokoyo.budidaya.model.viewmodel;
+package com.wonokoyo.mitra.model.viewmodel;
 
 import android.app.Application;
 import android.app.ProgressDialog;
@@ -7,14 +7,13 @@ import android.content.Intent;
 import android.view.View;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
-import com.wonokoyo.budidaya.flow.PlanActivity;
-import com.wonokoyo.budidaya.model.Plan;
-import com.wonokoyo.budidaya.model.repository.PlanRepository;
-import com.wonokoyo.budidaya.room.repo.PlanRepo;
+import com.wonokoyo.mitra.flow.PlanActivity;
+import com.wonokoyo.mitra.model.Plan;
+import com.wonokoyo.mitra.model.repository.PlanRepository;
+import com.wonokoyo.mitra.room.repo.PlanRepo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -93,7 +92,7 @@ public class PlanViewModel {
 
                             List<Plan> plan_bdy = new ArrayList<>();
                             for (Plan plan: plans) {
-                                if (plan.getNo_do().contains("BDY"))
+                                if (plan.getNo_do().contains("RPA"))
                                     plan_bdy.add(plan);
                             }
 

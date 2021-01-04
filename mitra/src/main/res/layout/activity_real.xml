@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	android:id="@+id/real"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".flow.PlanActivity">
+
+	<TextView
+		android:id="@+id/title_list_real"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentStart="true"
+		android:layout_alignParentEnd="true"
+		android:paddingTop="10dp"
+		android:paddingBottom="10dp"
+		android:text="Daftar Realisasi Panen"
+		android:textSize="22dp"
+		android:textColor="@color/cardview_light_background"
+		android:textStyle="bold"
+		android:gravity="center"
+		android:background="@color/colorPrimary"/>
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/rv_list_real"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:padding="10dp"
+		android:layout_below="@id/title_list_real"
+		android:background="@color/cardview_dark_background"
+		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+	<TextView
+		android:id="@+id/tvAlertReal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		android:text="@string/data_real_empty"
+		android:textSize="18sp"
+		android:textColor="@color/cardview_light_background"
+		android:textAllCaps="true"
+		android:gravity="center"
+		android:visibility="gone"/>
+
+</RelativeLayout>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	tools:context=".flow.WeighActivity">
+	<TextView
+		android:id="@+id/title_tara"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingTop="10dp"
+		android:paddingBottom="10dp"
+		android:text="Penimbangan Ayam"
+		android:textColor="@color/cardview_light_background"
+		android:textSize="22dp"
+		android:textStyle="bold"
+		android:gravity="center"
+		android:background="@color/colorPrimary"/>
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@color/cardview_dark_background">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+			<androidx.cardview.widget.CardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="10dp"
+				android:layout_marginTop="10dp"
+				app:cardCornerRadius="10dp">
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:paddingBottom="10dp"
+					android:orientation="vertical">
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="Input Timbang"
+						android:textSize="18dp"
+						android:paddingHorizontal="10dp"
+						android:paddingVertical="5dp"/>
+					<View
+						android:layout_width="match_parent"
+						android:layout_height="1dp"
+						android:background="@android:color/darker_gray"/>
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:gravity="center">
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginRight="5dp"
+							android:text="Timbang ke :"
+							android:gravity="end" />
+						<TextView
+							android:id="@+id/value_seq"
+							android:layout_width="30dp"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="5dp"
+							android:text="" />
+					</LinearLayout>
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:gravity="center">
+						<TextView
+							android:layout_width="100dp"
+							android:layout_height="wrap_content"
+							android:layout_marginRight="5dp"
+							android:text="Berat Timbang"
+							android:gravity="end" />
+						<EditText
+							android:id="@+id/value_weigh"
+							android:layout_width="50dp"
+							android:layout_height="wrap_content"
+							android:textAlignment="center"
+							android:inputType="number|numberDecimal|numberSigned"
+							android:maxLength="4"/>
+						<TextView
+							android:layout_width="30dp"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="5dp"
+							android:text="Kg" />
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:gravity="center">
+						<TextView
+							android:layout_width="100dp"
+							android:layout_height="wrap_content"
+							android:layout_marginRight="5dp"
+							android:text="Jumlah"
+							android:gravity="end" />
+						<EditText
+							android:id="@+id/value_quan"
+							android:layout_width="50dp"
+							android:layout_height="wrap_content"
+							android:textAlignment="center"
+							android:inputType="number|numberSigned"
+							android:maxLength="2"/>
+						<TextView
+							android:layout_width="30dp"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="5dp"
+							android:text="Ekor" />
+					</LinearLayout>
+				</LinearLayout>
+			</androidx.cardview.widget.CardView>
+
+			<androidx.cardview.widget.CardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="10dp"
+				android:layout_marginTop="10dp"
+				app:cardCornerRadius="10dp">
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:paddingBottom="10dp"
+					android:orientation="vertical">
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="Informasi Timbang"
+						android:textSize="18dp"
+						android:paddingHorizontal="10dp"
+						android:paddingVertical="5dp"/>
+					<View
+						android:layout_width="match_parent"
+						android:layout_height="1dp"
+						android:background="@android:color/darker_gray"/>
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:paddingHorizontal="10dp">
+						<TextView
+							android:layout_width="80dp"
+							android:layout_height="wrap_content"
+							android:layout_marginEnd="5dp"
+							android:text="Nilai Tara" />
+						<TextView
+							android:id="@+id/value_tara_avg"
+							android:layout_width="60dp"
+							android:layout_height="wrap_content"
+							android:text="" />
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:paddingHorizontal="10dp">
+						<TextView
+							android:layout_width="80dp"
+							android:layout_height="wrap_content"
+							android:layout_marginEnd="5dp"
+							android:text="Ekor" />
+						<TextView
+							android:id="@+id/value_quan_left"
+							android:layout_width="60dp"
+							android:layout_height="wrap_content"
+							android:layout_marginEnd="5dp"
+							android:text="" />
+
+						<TextView
+							android:layout_width="80dp"
+							android:layout_height="wrap_content"
+							android:layout_marginEnd="5dp"
+							android:text="Tonase" />
+						<TextView
+							android:id="@+id/value_tonase"
+							android:layout_width="60dp"
+							android:layout_height="wrap_content"
+							android:text="" />
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:paddingHorizontal="10dp">
+						<TextView
+							android:layout_width="80dp"
+							android:layout_height="wrap_content"
+							android:layout_marginEnd="5dp"
+							android:text="BB"/>
+						<TextView
+							android:id="@+id/value_bb"
+							android:layout_width="60dp"
+							android:layout_height="wrap_content"
+							android:text=""/>
+					</LinearLayout>
+				</LinearLayout>
+			</androidx.cardview.widget.CardView>
+
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:orientation="horizontal">
+				<Button
+					android:id="@+id/btnSimpanWeigh"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentStart="true"
+					android:layout_alignParentTop="true"
+					android:layout_marginLeft="8dp"
+					android:text="Simpan"/>
+				<Button
+					android:id="@+id/btnRefreshWeigh"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_toLeftOf="@id/btnLanjut"
+					android:layout_alignParentTop="true"
+					android:layout_marginRight="5dp"
+					android:text="Refresh"/>
+				<Button
+					android:id="@+id/btnLanjut"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentEnd="true"
+					android:layout_alignParentTop="true"
+					android:layout_marginRight="8dp"
+					android:text="Lanjut"/>
+			</RelativeLayout>
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>

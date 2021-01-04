@@ -27,7 +27,7 @@ public abstract class BdyDatabase extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (BdyDatabase.class) {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(), BdyDatabase.class,
-                        "muserp")
+                        "muserp_bdy")
                         .fallbackToDestructiveMigration()
                         .addCallback(sRoomDatabaseCallback)
                         .build();
