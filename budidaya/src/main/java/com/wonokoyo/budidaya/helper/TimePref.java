@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 public class TimePref {
     public static final String TM_PANEN = "tmPanenApp";
+    public static final String TM_NIK = "tmNik";
     public static final String TM_MULAI = "tmMulai";
     public static final String TM_SELESAI = "tmSelesai";
 
@@ -19,6 +20,10 @@ public class TimePref {
     public void saveSPString(String key, String value) {
         spEditor.putString(key, value);
         spEditor.commit();
+    }
+
+    public String getNik() {
+        return sp.getString(TM_NIK, "");
     }
 
     public String getMulai() {

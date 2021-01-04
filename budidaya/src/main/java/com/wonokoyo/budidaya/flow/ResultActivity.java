@@ -17,6 +17,8 @@ import com.wonokoyo.budidaya.model.Weigh;
 import com.wonokoyo.budidaya.model.adapter.WeighAdapter;
 import com.wonokoyo.budidaya.model.viewmodel.FlowViewModel;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ResultActivity extends AppCompatActivity {
@@ -120,8 +122,10 @@ public class ResultActivity extends AppCompatActivity {
         }
 
         double netto = bruto - total_tandu;
-
         double bb_avg = netto / quan;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String today = sdf.format(new Date());
 
         tvBruto.setText(String.format("%.1f", bruto));
         tvTara.setText(String.format("%.1f", total_tandu));
@@ -142,6 +146,7 @@ public class ResultActivity extends AppCompatActivity {
         real.setBb(bb_avg);
         real.setNetto(netto);
         real.setEkor(quan);
+        real.setTgl_realisasi(today);
         real.setMulai_panen(timePref.getMulai());
         real.setSelesai_panen(timePref.getSelesai());
         real.setTaras(plan.getTaras());

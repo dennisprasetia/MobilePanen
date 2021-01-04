@@ -33,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
         tvUser = findViewById(R.id.tv_user);
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
+        String id = intent.getStringExtra("id");
+        spManager.saveSPString(SharedPrefManager.SP_NAME, name);
+        spManager.saveSPString(SharedPrefManager.SP_USER, id);
+
         tvUser.setText(name);
 
         btnLogout = findViewById(R.id.btn_logout);
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent bdy = new Intent(MainActivity.this, BudidayaActivity.class);
+                bdy.putExtra("nik", spManager.getUser());
                 startActivity(bdy);
             }
         });
@@ -61,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent mitra = new Intent(MainActivity.this, MitraActivity.class);
+                mitra.putExtra("nik", spManager.getUser());
                 startActivity(mitra);
             }
         });

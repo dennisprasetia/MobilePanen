@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 import com.wonokoyo.mitra.flow.RealActivity;
 import com.wonokoyo.mitra.flow.ScanActivity;
+import com.wonokoyo.mitra.helper.TimePref;
 import com.wonokoyo.mitra.model.RealWithDetail;
 import com.wonokoyo.mitra.model.viewmodel.FlowViewModel;
 import com.wonokoyo.mitra.model.viewmodel.PlanViewModel;
@@ -29,6 +30,8 @@ public class MitraActivity extends AppCompatActivity {
 
     View view;
 
+    TimePref pref;
+
     PlanViewModel planViewModel;
     FlowViewModel flowViewModel;
 
@@ -37,6 +40,9 @@ public class MitraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_mitra);
+
+        pref = new TimePref(this);
+        pref.saveSPString(TimePref.TM_NIK, getIntent().getStringExtra("nik"));
 
         planViewModel = new PlanViewModel();
         planViewModel.init(getApplication(), MitraActivity.this);
@@ -97,7 +103,7 @@ public class MitraActivity extends AppCompatActivity {
                     @Override
                     public void onChanged(List<RealWithDetail> reals) {
                         if (reals.size() > 0) {
-                            flowViewModel.upload(reals);
+                            flowViewModel.upload(reals, pref.getNik());
                             flowViewModel.getAllReal().removeObservers(MitraActivity.this);
                         } else {
                             Snackbar snackbar = Snackbar.make(view, getString(R.string.data_empty),

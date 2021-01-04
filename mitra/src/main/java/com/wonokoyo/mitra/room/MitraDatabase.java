@@ -15,7 +15,7 @@ import com.wonokoyo.mitra.model.Weigh;
 import com.wonokoyo.mitra.room.dao.FlowDao;
 import com.wonokoyo.mitra.room.dao.PlanDao;
 
-@Database(entities = {Plan.class, Tara.class, Weigh.class, Real.class}, version = 1, exportSchema = false)
+@Database(entities = {Plan.class, Tara.class, Weigh.class, Real.class}, version = 2, exportSchema = false)
 public abstract class MitraDatabase extends RoomDatabase {
     private static volatile MitraDatabase INSTANCE;
 

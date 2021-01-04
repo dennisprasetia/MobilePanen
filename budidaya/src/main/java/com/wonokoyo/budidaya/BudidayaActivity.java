@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 import com.wonokoyo.budidaya.flow.RealActivity;
 import com.wonokoyo.budidaya.flow.ScanActivity;
+import com.wonokoyo.budidaya.helper.TimePref;
 import com.wonokoyo.budidaya.model.RealWithDetail;
 import com.wonokoyo.budidaya.model.viewmodel.FlowViewModel;
 import com.wonokoyo.budidaya.model.viewmodel.PlanViewModel;
@@ -32,6 +33,8 @@ public class BudidayaActivity extends AppCompatActivity {
 
     View view;
 
+    TimePref pref;
+
     PlanViewModel planViewModel;
     FlowViewModel flowViewModel;
 
@@ -40,6 +43,9 @@ public class BudidayaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_budidaya);
+
+        pref = new TimePref(this);
+        pref.saveSPString(TimePref.TM_NIK, getIntent().getStringExtra("nik"));
 
         planViewModel = new PlanViewModel();
         planViewModel.init(getApplication(), BudidayaActivity.this);
@@ -100,7 +106,7 @@ public class BudidayaActivity extends AppCompatActivity {
                     @Override
                     public void onChanged(List<RealWithDetail> reals) {
                         if (reals.size() > 0) {
-                            flowViewModel.upload(reals);
+                            flowViewModel.upload(reals, pref.getNik());
                             flowViewModel.getAllReal().removeObservers(BudidayaActivity.this);
                         } else {
                             Snackbar snackbar = Snackbar.make(view, getString(R.string.data_empty),

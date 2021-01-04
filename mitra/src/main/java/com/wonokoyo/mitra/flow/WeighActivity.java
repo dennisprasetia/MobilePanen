@@ -157,7 +157,7 @@ public class WeighActivity extends AppCompatActivity {
             total_tara = total_tara + tara.getBerat();
         }
 
-        double avg_tara = total_tara / 12.5;
+        double avg_tara = total_tara / 1;
         tvTara.setText(String.format("%.1f", avg_tara));
     }
 

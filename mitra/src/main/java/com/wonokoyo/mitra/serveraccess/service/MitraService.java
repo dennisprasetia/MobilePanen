@@ -12,5 +12,5 @@ public interface MitraService {
     Call<ResponseBody> getPlanByDate(@Query("start") String start, @Query("end") String end);
 
     @GET(Url.SAVE_DATA)
-    Call<ResponseBody> saveDataReal(@Query("data") String data);
+    Call<ResponseBody> saveDataReal(@Query("data") String data, @Query("nik") String nik);
 }

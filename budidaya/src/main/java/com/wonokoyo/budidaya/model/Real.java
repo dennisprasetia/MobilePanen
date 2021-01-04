@@ -39,6 +39,10 @@ public class Real implements Serializable {
     @Expose
     private String tgl_panen;
 
+    @SerializedName("tgl_realisasi")
+    @Expose
+    private String tgl_realisasi;
+
     @SerializedName("mulai_panen")
     @Expose
     private String mulai_panen;
@@ -131,6 +135,14 @@ public class Real implements Serializable {
 
     public void setTgl_panen(String tgl_panen) {
         this.tgl_panen = tgl_panen;
+    }
+
+    public String getTgl_realisasi() {
+        return tgl_realisasi;
+    }
+
+    public void setTgl_realisasi(String tgl_realisasi) {
+        this.tgl_realisasi = tgl_realisasi;
     }
 
     public String getMulai_panen() {

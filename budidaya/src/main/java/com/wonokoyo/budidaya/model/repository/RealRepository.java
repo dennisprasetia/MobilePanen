@@ -20,8 +20,8 @@ public class RealRepository {
         return realRepository;
     }
 
-    public void saveReal(List<RealWithDetail> reals, Callback<ResponseBody> listener) {
-        Call<ResponseBody> call = RetrofitInstance.getBdyService().saveDataReal(new Gson().toJson(reals));
+    public void saveReal(List<RealWithDetail> reals, String nik, Callback<ResponseBody> listener) {
+        Call<ResponseBody> call = RetrofitInstance.getBdyService().saveDataReal(new Gson().toJson(reals), nik);
         call.enqueue(listener);
     }
 }

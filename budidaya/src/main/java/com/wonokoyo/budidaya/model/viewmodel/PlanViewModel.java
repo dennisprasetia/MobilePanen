@@ -113,7 +113,8 @@ public class PlanViewModel {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                if (dialog.isShowing())
+                    dialog.dismiss();
             }
         };
 

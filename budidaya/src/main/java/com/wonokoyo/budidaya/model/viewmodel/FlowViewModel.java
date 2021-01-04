@@ -69,7 +69,7 @@ public class FlowViewModel {
         return flowRepo.getAllReal();
     }
 
-    public void upload(final List<RealWithDetail> reals) {
+    public void upload(final List<RealWithDetail> reals, String nik) {
         dialog.show();
 
         Callback<ResponseBody> listener = new Callback<ResponseBody>() {
@@ -85,16 +85,12 @@ public class FlowViewModel {
                         if (dialog.isShowing())
                             dialog.dismiss();
 
-                        Log.d("CEK DATA", jsonObject.toString());
-
                         if (status == 1) {
                             for (RealWithDetail real: reals) {
                                 real.getReal().setStatus(1);
 
                                 flowRepo.updateReal(real.getReal());
                             }
-                        } else {
-
                         }
 
                         Toast toast = Toast.makeText(app.getApplicationContext(), message, Toast.LENGTH_SHORT);
@@ -105,15 +101,19 @@ public class FlowViewModel {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                } else {
+                    if (dialog.isShowing())
+                        dialog.dismiss();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                if (dialog.isShowing())
+                    dialog.dismiss();
             }
         };
 
-        realRepository.saveReal(reals, listener);
+        realRepository.saveReal(reals, nik, listener);
     }
 }

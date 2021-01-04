@@ -125,7 +125,7 @@ public class TaraActivity extends AppCompatActivity {
     }
 
     public void save() {
-        if (count < 5) {
+        if (count < 1) {
             if (etValue.getText().toString() != null ||
                     !etValue.getText().toString().equalsIgnoreCase("") ||
                     !etValue.getText().toString().equalsIgnoreCase("0.0")) {

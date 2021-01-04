@@ -15,7 +15,7 @@ import com.wonokoyo.budidaya.model.Weigh;
 import com.wonokoyo.budidaya.room.dao.FlowDao;
 import com.wonokoyo.budidaya.room.dao.PlanDao;
 
-@Database(entities = {Plan.class, Tara.class, Weigh.class, Real.class}, version = 3, exportSchema = false)
+@Database(entities = {Plan.class, Tara.class, Weigh.class, Real.class}, version = 4, exportSchema = false)
 public abstract class BdyDatabase extends RoomDatabase {
     private static volatile BdyDatabase INSTANCE;
 
