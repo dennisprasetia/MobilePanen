@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,6 +32,7 @@ public class TaraActivity extends AppCompatActivity {
 
     private Thread threadReceive;
 
+    private TextView tvSj;
     private EditText etValue;
     private Button btnRefresh;
     private Button btnSave;
@@ -61,6 +63,9 @@ public class TaraActivity extends AppCompatActivity {
         Intent intent = getIntent();
         plan = (Plan) intent.getSerializableExtra("plan");
         taras = new ArrayList<>();
+
+        tvSj = findViewById(R.id.tv_no_sj);
+        tvSj.setText(plan.getNo_do() + " - " + plan.getNo_sj());
 
         etValue = findViewById(R.id.value_tara);
         rvTara = findViewById(R.id.rv_list_tara);

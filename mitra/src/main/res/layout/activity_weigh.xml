@@ -84,7 +84,12 @@
 							android:layout_height="wrap_content"
 							android:textAlignment="center"
 							android:inputType="number|numberDecimal|numberSigned"
-							android:maxLength="4"/>
+							android:maxLength="4"
+							android:clickable="false"
+							android:longClickable="false"
+							android:contextClickable="false"
+							android:cursorVisible="false"
+							android:focusable="false" />
 						<TextView
 							android:layout_width="30dp"
 							android:layout_height="wrap_content"

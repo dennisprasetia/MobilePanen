@@ -23,12 +23,23 @@
 		android:gravity="center"
 		android:background="@color/colorPrimary"/>
 
+	<TextView
+		android:id="@+id/tv_no_sj"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/title_tara"
+		android:layout_alignParentStart="false"
+		android:layout_alignParentEnd="true"
+		android:paddingVertical="5dp"
+		android:textSize="18sp"
+		android:gravity="center" />
+
 	<LinearLayout
 		android:id="@+id/ll_data_receive"
 		android:orientation="horizontal"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_below="@id/title_tara"
+		android:layout_below="@id/tv_no_sj"
 		android:layout_alignParentStart="true"
 		android:layout_alignParentEnd="true"
 		android:gravity="center">
@@ -45,7 +56,12 @@
 			android:layout_marginEnd="10dp"
 			android:textAlignment="center"
 			android:inputType="number|numberDecimal|numberSigned"
-			android:maxLength="4"/>
+			android:maxLength="4"
+			android:clickable="false"
+			android:longClickable="false"
+			android:contextClickable="false"
+			android:cursorVisible="false"
+			android:focusable="false" />
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
