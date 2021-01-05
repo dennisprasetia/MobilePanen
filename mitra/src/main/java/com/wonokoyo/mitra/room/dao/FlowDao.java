@@ -38,8 +38,16 @@ public interface FlowDao {
     void update(List<Real> reals);
 
     @Transaction
-    @Query("SELECT * FROM tara WHERE rit = :rit AND tgl_tara = :tgl_tara")
-    LiveData<List<Tara>> getTaraByRitAndTgl(String rit, String tgl_tara);
+    @Query("SELECT * FROM tara WHERE rit = :rit AND tgl_tara = :tgl_tara LIMIT 5")
+    LiveData<List<Tara>> getTaraByRitAndDate(String rit, String tgl_tara);
+
+    @Transaction
+    @Query("SELECT COUNT(*) as quantity FROM tara WHERE nodo_real = :no_do")
+    LiveData<Integer> getTaraByDo(String no_do);
+
+    @Transaction
+    @Query("SELECT * FROM weigh where nodo_real = :no_do")
+    LiveData<List<Weigh>> getWeighByDo(String no_do);
 
     @Transaction
     @Query("SELECT * FROM real WHERE status = 0")

@@ -78,4 +78,16 @@ public class FlowRepo {
     public LiveData<Integer> countReal() {
         return flowDao.getRealCount();
     }
+
+    public LiveData<List<Tara>> getTaraByRitAndDate(String rit, String date) {
+        return flowDao.getTaraByRitAndDate(rit, date);
+    }
+
+    public LiveData<Integer> getTaraByDo(String no_do) {
+        return flowDao.getTaraByDo(no_do);
+    }
+
+    public LiveData<List<Weigh>> getWeighByDo(String no_do) {
+        return flowDao.getWeighByDo(no_do);
+    }
 }

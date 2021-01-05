@@ -94,6 +94,11 @@ public class ResultActivity extends AppCompatActivity {
         calcWeighAndSave();
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
     public double calcTara() {
         double total = 0.0;
         List<Tara> taras = plan.getTaras();

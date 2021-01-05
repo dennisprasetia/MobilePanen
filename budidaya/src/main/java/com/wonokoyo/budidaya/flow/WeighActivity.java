@@ -1,6 +1,8 @@
 package com.wonokoyo.budidaya.flow;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,10 +52,13 @@ public class WeighActivity extends AppCompatActivity {
     private int quan;
     private double tonase;
     private double total_nett;
+    private boolean check_exist = true;
 
     private Plan plan;
 
     private List<Weigh> weighs;
+
+    LifecycleOwner owner;
 
     FlowViewModel flowViewModel;
 
@@ -134,21 +139,57 @@ public class WeighActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Weigh weigh = new Weigh();
-                weigh.setNodo_real(plan.getNo_do());
-                weigh.setUrut(count);
-                weigh.setBerat(Double.valueOf(etValue.getText().toString()));
-                weigh.setEkor(Integer.valueOf(etQuan.getText().toString()));
+                if (validate()) {
+                    Weigh weigh = new Weigh();
+                    weigh.setNodo_real(plan.getNo_do());
+                    weigh.setUrut(count);
+                    weigh.setBerat(Double.valueOf(etValue.getText().toString()));
+                    weigh.setEkor(Integer.valueOf(etQuan.getText().toString()));
 
-                weighs.add(weigh);
+                    weighs.add(weigh);
 
-                flowViewModel.saveWeigh(weigh);
-                calcAndReset();
+                    flowViewModel.saveWeigh(weigh);
+                    calcAndReset();
+                }
+            }
+        });
+
+        owner = this;
+        flowViewModel.getWeighByDo(plan.getNo_do()).observe(owner, new Observer<List<Weigh>>() {
+            @Override
+            public void onChanged(List<Weigh> weigh_exist) {
+                if (weigh_exist.size() > 0 && check_exist) {
+                    calcExist(weigh_exist);
+                    weighs = weigh_exist;
+                } else {
+                    check_exist = false;
+                }
+
+                flowViewModel.getWeighByDo(plan.getNo_do()).removeObservers(owner);
             }
         });
 
         threadReceive = recieve();
         threadReceive.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
+    public boolean validate() {
+        if (etValue.getText().toString().equalsIgnoreCase("0.0") || etValue.getText().toString().equalsIgnoreCase("")) {
+            etValue.setError("Awas Kosong");
+            return false;
+        }
+
+        if (etQuan.getText().toString().equalsIgnoreCase("0") ||  etQuan.getText().toString().equalsIgnoreCase("")) {
+            etQuan.setError("Awas Kosong");
+            return false;
+        }
+
+        return true;
     }
 
     public void setTara() {
@@ -159,6 +200,28 @@ public class WeighActivity extends AppCompatActivity {
 
         double avg_tara = total_tara / 12.5;
         tvTara.setText(String.format("%.1f", avg_tara));
+    }
+
+    public void calcExist(List<Weigh> weighs) {
+        for (Weigh w : weighs) {
+            quan += w.getEkor();
+            tails = tails - w.getEkor();
+            tvLeft.setText(String.valueOf(tails));
+
+            double nett = w.getBerat() - Double.valueOf(tvTara.getText().toString());
+            tonase = tonase - nett;
+            total_nett += nett;
+        }
+
+        tvTonase.setText(String.format("%.2f", tonase));
+
+        double bb = total_nett / quan;
+        tvBb.setText(String.format("%.2f", bb));
+
+        count = weighs.size() + 1;
+        tvSeq.setText(String.valueOf(count));
+
+        check_exist = false;
     }
 
     public void calcAndReset() {

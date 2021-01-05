@@ -69,6 +69,18 @@ public class FlowViewModel {
         return flowRepo.getAllReal();
     }
 
+    public LiveData<List<Tara>> getTaraByRitAndDate(String rit, String date) {
+        return flowRepo.getTaraByRitAndDate(rit, date);
+    }
+
+    public LiveData<List<Weigh>> getWeighByDo(String no_do) {
+        return flowRepo.getWeighByDo(no_do);
+    }
+
+    public LiveData<Integer> getTaraByDo(String no_do) {
+        return flowRepo.getTaraByDo(no_do);
+    }
+
     public void upload(final List<RealWithDetail> reals, String nik) {
         dialog.show();
 

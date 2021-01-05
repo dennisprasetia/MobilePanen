@@ -87,7 +87,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
                     String time = sdf.format(new Date());
                     timePref.saveSPString(TimePref.TM_MULAI, time);
 
-                    Intent intent = new Intent(ScanActivity.this, TaraActivity.class);
+                    Intent intent = new Intent(ScanActivity.this, PickTypeActivity.class);
                     intent.putExtra("plan", plan);
                     startActivity(intent);
                     finish();

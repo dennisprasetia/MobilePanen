@@ -2,6 +2,7 @@ package com.wonokoyo.mitra;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 
 import android.content.Intent;
@@ -27,6 +28,8 @@ public class MitraActivity extends AppCompatActivity {
     private CardView cvSend;
     private TextView tvQuanPlan;
     private TextView tvQuanReal;
+
+    LifecycleOwner owner;
 
     View view;
 
@@ -95,16 +98,17 @@ public class MitraActivity extends AppCompatActivity {
             }
         });
 
+        owner = this;
         cvSend = findViewById(R.id.cvSend);
         cvSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                flowViewModel.getAllReal().observe(MitraActivity.this, new Observer<List<RealWithDetail>>() {
+                flowViewModel.getAllReal().observe(owner, new Observer<List<RealWithDetail>>() {
                     @Override
                     public void onChanged(List<RealWithDetail> reals) {
                         if (reals.size() > 0) {
                             flowViewModel.upload(reals, pref.getNik());
-                            flowViewModel.getAllReal().removeObservers(MitraActivity.this);
+                            flowViewModel.getAllReal().removeObservers(owner);
                         } else {
                             Snackbar snackbar = Snackbar.make(view, getString(R.string.data_empty),
                                     Snackbar.LENGTH_INDEFINITE);

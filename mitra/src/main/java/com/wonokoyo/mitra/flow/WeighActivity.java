@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 
 import com.wonokoyo.mitra.R;
 import com.wonokoyo.mitra.helper.TimePref;
@@ -46,10 +48,12 @@ public class WeighActivity extends AppCompatActivity {
     private Button btnNext;
 
     private int count;
+    private int max_count_tara;
     private int tails;
     private int quan;
     private double tonase;
     private double total_nett;
+    private boolean check_exist = true;
 
     private Plan plan;
 
@@ -67,8 +71,8 @@ public class WeighActivity extends AppCompatActivity {
 
         timePref = new TimePref(this);
 
-        Intent intent = getIntent();
-        plan = (Plan) intent.getSerializableExtra("plan");
+        plan = (Plan) getIntent().getSerializableExtra("plan");
+        max_count_tara = getIntent().getIntExtra("count", 5);
         weighs = new ArrayList<>();
 
         flowViewModel = new FlowViewModel();
@@ -112,6 +116,7 @@ public class WeighActivity extends AppCompatActivity {
 
                 Intent result = new Intent(WeighActivity.this, ResultActivity.class);
                 result.putExtra("plan", plan);
+                result.putExtra("count", max_count_tara);
                 startActivity(result);
                 finish();
             }
@@ -134,21 +139,56 @@ public class WeighActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Weigh weigh = new Weigh();
-                weigh.setNodo_real(plan.getNo_do());
-                weigh.setUrut(count);
-                weigh.setBerat(Double.valueOf(etValue.getText().toString()));
-                weigh.setEkor(Integer.valueOf(etQuan.getText().toString()));
+                if (validate()) {
+                    Weigh weigh = new Weigh();
+                    weigh.setNodo_real(plan.getNo_do());
+                    weigh.setUrut(count);
+                    weigh.setBerat(Double.valueOf(etValue.getText().toString()));
+                    weigh.setEkor(Integer.valueOf(etQuan.getText().toString()));
 
-                weighs.add(weigh);
+                    weighs.add(weigh);
 
-                flowViewModel.saveWeigh(weigh);
-                calcAndReset();
+                    flowViewModel.saveWeigh(weigh);
+                    calcAndReset();
+                }
+            }
+        });
+
+        flowViewModel.getWeighByDo(plan.getNo_do()).observe(WeighActivity.this, new Observer<List<Weigh>>() {
+            @Override
+            public void onChanged(List<Weigh> weigh_exist) {
+                if (weigh_exist.size() > 0 && check_exist) {
+                    calcExist(weigh_exist);
+                    weighs = weigh_exist;
+                } else {
+                    check_exist = false;
+                }
+
+                flowViewModel.getWeighByDo(plan.getNo_do()).removeObservers(WeighActivity.this);
             }
         });
 
         threadReceive = recieve();
         threadReceive.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
+    public boolean validate() {
+        if (etValue.getText().toString().equalsIgnoreCase("0.0") || etValue.getText().toString().equalsIgnoreCase("")) {
+            etValue.setError("Awas Kosong");
+            return false;
+        }
+
+        if (etQuan.getText().toString().equalsIgnoreCase("0") ||  etQuan.getText().toString().equalsIgnoreCase("")) {
+            etQuan.setError("Awas Kosong");
+            return false;
+        }
+
+        return true;
     }
 
     public void setTara() {
@@ -158,7 +198,32 @@ public class WeighActivity extends AppCompatActivity {
         }
 
         double avg_tara = total_tara / 1;
+        if (max_count_tara == 5) {
+            avg_tara = total_tara / 12.5;
+        }
         tvTara.setText(String.format("%.1f", avg_tara));
+    }
+
+    public void calcExist(List<Weigh> weighs) {
+        for (Weigh w : weighs) {
+            quan += w.getEkor();
+            tails = tails - w.getEkor();
+            tvLeft.setText(String.valueOf(tails));
+
+            double nett = w.getBerat() - Double.valueOf(tvTara.getText().toString());
+            tonase = tonase - nett;
+            total_nett += nett;
+        }
+
+        tvTonase.setText(String.format("%.2f", tonase));
+
+        double bb = total_nett / quan;
+        tvBb.setText(String.format("%.2f", bb));
+
+        count = weighs.size() + 1;
+        tvSeq.setText(String.valueOf(count));
+
+        check_exist = false;
     }
 
     public void calcAndReset() {

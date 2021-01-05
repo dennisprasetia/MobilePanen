@@ -37,6 +37,7 @@ public class ResultActivity extends AppCompatActivity {
     private RecyclerView rvWeigh;
 
     private Plan plan;
+    private int max_count_tara;
 
     FlowViewModel flowViewModel;
 
@@ -50,6 +51,7 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         plan = (Plan) getIntent().getSerializableExtra("plan");
+        max_count_tara = getIntent().getIntExtra("count", 5);
 
         timePref = new TimePref(this);
 
@@ -94,6 +96,11 @@ public class ResultActivity extends AppCompatActivity {
         calcWeighAndSave();
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
     public double calcTara() {
         double total = 0.0;
         List<Tara> taras = plan.getTaras();
@@ -103,6 +110,9 @@ public class ResultActivity extends AppCompatActivity {
         }
 
         double tara_avg = total / 1;
+        if (max_count_tara == 5) {
+            tara_avg = total / 12.5;
+        }
 
         return tara_avg;
     }

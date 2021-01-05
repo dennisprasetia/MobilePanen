@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wonokoyo.mitra.R;
@@ -20,7 +22,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,9 +43,13 @@ public class TaraActivity extends AppCompatActivity {
     private RecyclerView rvTara;
 
     private int count;
+    private int max_count;
+    private String date;
     private Plan plan;
 
     private List<Tara> taras;
+
+    LifecycleOwner owner;
 
     FlowViewModel flowViewModel;
 
@@ -53,15 +61,17 @@ public class TaraActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_tara);
 
-        count = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        date = sdf.format(new Date());
 
         flowViewModel = new FlowViewModel();
         flowViewModel.init(getApplication(), TaraActivity.this);
 
-        adapter = new TaraAdapter();
+        count = 0;
+        plan = (Plan) getIntent().getSerializableExtra("plan");
+        max_count = getIntent().getIntExtra("count", 1);
 
-        Intent intent = getIntent();
-        plan = (Plan) intent.getSerializableExtra("plan");
+        adapter = new TaraAdapter();
         taras = new ArrayList<>();
 
         tvSj = findViewById(R.id.tv_no_sj);
@@ -89,6 +99,18 @@ public class TaraActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 save();
+            }
+        });
+
+        owner = this;
+        flowViewModel.getTaraByRitAndDate(plan.getRit(), date).observe(owner, new Observer<List<Tara>>() {
+            @Override
+            public void onChanged(List<Tara> tara_exist) {
+                adapter.updateData(tara_exist);
+                count = tara_exist.size();
+                taras = tara_exist;
+
+                flowViewModel.getTaraByRitAndDate(plan.getRit(), date).removeObservers(owner);
             }
         });
 
@@ -129,17 +151,25 @@ public class TaraActivity extends AppCompatActivity {
         });
     }
 
+    public boolean validate() {
+        if (etValue.getText().toString().equalsIgnoreCase("") || etValue.getText().toString().equalsIgnoreCase("0.0")) {
+            etValue.setError("Awas Kosong");
+            return false;
+        }
+
+        return true;
+    }
+
     public void save() {
-        if (count < 1) {
-            if (etValue.getText().toString() != null ||
-                    !etValue.getText().toString().equalsIgnoreCase("") ||
-                    !etValue.getText().toString().equalsIgnoreCase("0.0")) {
+        if (count < max_count) {
+            if (validate()) {
                 count++;
                 Tara tara = new Tara();
                 tara.setRit(plan.getRit());
                 tara.setNodo_real(plan.getNo_do());
                 tara.setUrut(String.valueOf(count));
                 tara.setBerat(Double.valueOf(etValue.getText().toString()));
+                tara.setTgl_tara(date);
 
                 taras.add(tara);
                 adapter.updateData(taras);
@@ -156,13 +186,45 @@ public class TaraActivity extends AppCompatActivity {
         } else {
             plan.setTaras(taras);
 
+            if (taras.get(0).getNodo_real() != plan.getNo_do()) {
+                saveTaraSameRit(taras);
+            }
+
             if (threadReceive.isAlive())
                 threadReceive.interrupt();
 
             Intent intent = new Intent(TaraActivity.this, WeighActivity.class);
             intent.putExtra("plan", plan);
+            intent.putExtra("count", max_count);
             startActivity(intent);
             finish();
         }
+    }
+
+    public void saveTaraSameRit(final List<Tara> taras) {
+        flowViewModel.getTaraByDo(plan.getNo_do()).observe(owner, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if (integer != 5) {
+                    for (Tara t : taras) {
+                        Tara new_tara = new Tara();
+                        new_tara.setUrut(t.getUrut());
+                        new_tara.setBerat(t.getBerat());
+                        new_tara.setRit(plan.getRit());
+                        new_tara.setTgl_tara(date);
+                        new_tara.setNodo_real(plan.getNo_do());
+
+                        flowViewModel.saveTara(new_tara);
+                    }
+                }
+
+                flowViewModel.getTaraByDo(plan.getNo_do()).removeObservers(owner);
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }
