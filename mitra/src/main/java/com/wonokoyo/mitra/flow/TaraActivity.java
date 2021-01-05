@@ -205,7 +205,7 @@ public class TaraActivity extends AppCompatActivity {
         flowViewModel.getTaraByDo(plan.getNo_do()).observe(owner, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
-                if (integer != 5) {
+                if (integer != max_count) {
                     for (Tara t : taras) {
                         Tara new_tara = new Tara();
                         new_tara.setUrut(t.getUrut());
