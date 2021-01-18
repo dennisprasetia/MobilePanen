@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -76,16 +77,8 @@ public class LoginActivity extends AppCompatActivity implements BiometricCallbac
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-                    String deviceId = "";
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        deviceId = manager.getImei(0);
-                    } else {
-                        deviceId = manager.getDeviceId();
-                    }
-
-                    loginUser(etUsername.getText().toString(), etPassword.getText().toString(), deviceId);
-                }
+                String imei = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+                loginUser(etUsername.getText().toString(), etPassword.getText().toString(), imei);
             }
         });
 
@@ -165,14 +158,8 @@ public class LoginActivity extends AppCompatActivity implements BiometricCallbac
     @Override
     public void onAuthenticationSuccessful() {
         Toast.makeText(getApplicationContext(), getString(R.string.biometric_success), Toast.LENGTH_SHORT).show();
-        if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-            String deviceId = "";
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                deviceId = manager.getImei(0);
-            }
-
-            loginUser("", "", deviceId);
-        }
+        String imei = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+        loginUser("", "", imei);
     }
 
     @Override

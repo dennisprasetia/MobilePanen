@@ -1,10 +1,13 @@
 package com.wonokoyo.mobilepanen.model;
 
+import androidx.room.Entity;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+@Entity(tableName = "user")
 public class User implements Serializable {
     @SerializedName("name")
     @Expose

@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
@@ -77,11 +78,12 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.password);
         etTelephone = findViewById(R.id.telephone);
         etId = findViewById(R.id.device_id);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                etId.setText(manager.getImei(0).toString());
-            }
-        }
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                etId.setText(manager.getImei(0).toString());
+//            }
+//        }
+        etId.setText(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
 
         etConfirm = findViewById(R.id.conf_password);
         etConfirm.setOnKeyListener(new View.OnKeyListener() {

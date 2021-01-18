@@ -99,6 +99,7 @@ public class PlanViewModel {
 
                             planRepo.saveAllPlan(plan_bdy);
                             Intent intent = new Intent(app.getApplicationContext(), PlanActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                             app.startActivity(intent);
                         } else {
                             Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
