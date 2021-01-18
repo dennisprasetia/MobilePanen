@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -55,11 +56,17 @@ public class LoginActivity extends AppCompatActivity implements BiometricCallbac
 
     private String idUser, namaUser, message;
 
+    ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
+
+        dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.setMessage("Mohon tunggu...");
 
         view = findViewById(R.id.login);
 
@@ -79,6 +86,7 @@ public class LoginActivity extends AppCompatActivity implements BiometricCallbac
             public void onClick(View v) {
                 String imei = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
                 loginUser(etUsername.getText().toString(), etPassword.getText().toString(), imei);
+                dialog.show();
             }
         });
 
@@ -160,6 +168,7 @@ public class LoginActivity extends AppCompatActivity implements BiometricCallbac
         Toast.makeText(getApplicationContext(), getString(R.string.biometric_success), Toast.LENGTH_SHORT).show();
         String imei = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         loginUser("", "", imei);
+        dialog.show();
     }
 
     @Override
@@ -199,6 +208,9 @@ public class LoginActivity extends AppCompatActivity implements BiometricCallbac
 
                             resultLogin(false);
                         }
+
+                        if (dialog.isShowing())
+                            dialog.dismiss();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
@@ -220,6 +232,9 @@ public class LoginActivity extends AppCompatActivity implements BiometricCallbac
                 idUser = "";
                 namaUser = "";
                 message = "";
+
+                if (dialog.isShowing())
+                    dialog.dismiss();
             }
         });
     }
