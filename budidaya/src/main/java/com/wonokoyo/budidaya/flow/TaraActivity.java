@@ -198,6 +198,8 @@ public class TaraActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+
+        etValue.setText("");
     }
 
     public void saveTaraSameRit(final List<Tara> taras) {
