@@ -21,6 +21,13 @@ android {
     }
 }
 
+android.applicationVariants.all { variant ->
+    variant.outputs.all {
+        def appName = "Mobile Panen"
+        outputFileName = appName + "-${variant.versionName}.apk"
+    }
+}
+
 dependencies {
     implementation project(":budidaya")
     implementation project(":mitra")
