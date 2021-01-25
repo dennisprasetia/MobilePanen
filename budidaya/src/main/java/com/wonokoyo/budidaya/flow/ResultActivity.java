@@ -114,7 +114,7 @@ public class ResultActivity extends AppCompatActivity {
 
     public void calcWeighAndSave() {
         // CALCULATE
-        String tara_avg = String.format("%.1f", calcTara());
+        String tara_avg = String.format("%.1f", calcTara()).replace(",", ".");
         List<Weigh> weighs = plan.getWeighs();
 
         double total_tandu = Double.valueOf(tara_avg) * weighs.size();

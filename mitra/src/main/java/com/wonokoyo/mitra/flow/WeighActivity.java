@@ -210,7 +210,7 @@ public class WeighActivity extends AppCompatActivity {
             tails = tails - w.getEkor();
             tvLeft.setText(String.valueOf(tails));
 
-            double nett = w.getBerat() - Double.valueOf(tvTara.getText().toString());
+            double nett = w.getBerat() - Double.valueOf(tvTara.getText().toString().replace(",", "."));
             tonase = tonase - nett;
             total_nett += nett;
         }
@@ -228,11 +228,13 @@ public class WeighActivity extends AppCompatActivity {
 
     public void calcAndReset() {
         // CALCULATE
+        String tara = tvTara.getText().toString().replace(",", ".");
+
         quan += Integer.valueOf(etQuan.getText().toString());
         tails = tails - Integer.valueOf(etQuan.getText().toString());
         tvLeft.setText(String.valueOf(tails));
 
-        double nett = Double.valueOf(etValue.getText().toString()) - Double.valueOf(tvTara.getText().toString());
+        double nett = Double.valueOf(etValue.getText().toString()) - Double.valueOf(tara);
         tonase = tonase - nett;
         total_nett += nett;
         tvTonase.setText(String.format("%.2f", tonase));
