@@ -33,6 +33,7 @@ public class CustomDialog {
         TextView tvDo = view.findViewById(R.id.tv_det_plan_do);
         TextView tvSj = view.findViewById(R.id.tv_det_plan_sj);
         TextView tvRit = view.findViewById(R.id.tv_det_plan_rit);
+        TextView tvTglPanen = view.findViewById(R.id.tv_det_plan_tgl_panen);
         TextView tvTon = view.findViewById(R.id.tv_det_plan_tonnage);
         TextView tvQuan = view.findViewById(R.id.tv_det_plan_quan);
         TextView tvDep = view.findViewById(R.id.tv_det_plan_depart);
@@ -45,6 +46,7 @@ public class CustomDialog {
         tvDo.setText(plan.getNo_do());
         tvSj.setText(plan.getNo_sj());
         tvRit.setText(plan.getRit());
+        tvTglPanen.setText(plan.getTgl_panen());
         tvTon.setText(String.valueOf(plan.getBerat()));
         tvQuan.setText(String.valueOf(plan.getEkor()));
         tvDep.setText(plan.getBerangkat());

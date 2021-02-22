@@ -68,6 +68,21 @@
 				android:text="RPA"
 				android:textSize="16dp"/>
 
+			<!--TGL PANEN-->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Tgl Panen :"
+				android:textSize="18dp"
+				android:textStyle="bold"/>
+			<TextView
+				android:id="@+id/tv_det_plan_tgl_panen"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:text="RPA"
+				android:textSize="16dp"/>
+
 			<!--TONASE-->
 			<TextView
 				android:layout_width="match_parent"

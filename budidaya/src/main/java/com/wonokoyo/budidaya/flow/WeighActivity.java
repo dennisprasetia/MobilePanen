@@ -189,6 +189,8 @@ public class WeighActivity extends AppCompatActivity {
             return false;
         }
 
+        etValue.setError(null);
+        etQuan.setError(null);
         return true;
     }
 
@@ -271,8 +273,11 @@ public class WeighActivity extends AppCompatActivity {
                                     Pattern pattern = Pattern.compile("[0-9]+\\.[0-9]");
                                     Matcher matcher = pattern.matcher(response);
 
-                                    if (matcher.find())
+                                    if (matcher.find()) {
+                                        etValue.setError(null);
+                                        etQuan.setError(null);
                                         etValue.setText(matcher.group());
+                                    }
                                 }
                             }
                         });

@@ -135,8 +135,10 @@ public class TaraActivity extends AppCompatActivity {
                                     Pattern pattern = Pattern.compile("[0-9]+\\.[0-9]");
                                     Matcher matcher = pattern.matcher(response);
 
-                                    if (matcher.find())
+                                    if (matcher.find()) {
+                                        etValue.setError(null);
                                         etValue.setText(matcher.group());
+                                    }
                                 }
                             }
                         });
@@ -157,6 +159,7 @@ public class TaraActivity extends AppCompatActivity {
             return false;
         }
 
+        etValue.setError(null);
         return true;
     }
 

@@ -142,6 +142,7 @@ public class ResultActivity extends AppCompatActivity {
         Real real = new Real();
         real.setNo_do(plan.getNo_do());
         real.setNo_sj(plan.getNo_sj());
+        real.setTgl_panen(plan.getTgl_panen());
         real.setRit(plan.getRit());
         real.setKandang(plan.getKandang());
         real.setMitra(plan.getMitra());
