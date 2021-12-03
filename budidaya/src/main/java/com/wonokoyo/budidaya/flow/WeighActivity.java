@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -101,24 +103,28 @@ public class WeighActivity extends AppCompatActivity {
         total_nett = 0.0;
         tvSeq.setText(String.valueOf(count));
 
+        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Peringatan !");
+        alert.setMessage("Apakah anda yakin mengakhiri penimbangan ?");
+        alert.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                doSave();
+            }
+        });
+        alert.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
         btnSave = findViewById(R.id.btnSimpanWeigh);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                plan.setWeighs(weighs);
-
-                if (threadReceive.isAlive())
-                    threadReceive.interrupt();
-
-                // SET JAM SELESAI PANEN
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String time = sdf.format(new Date());
-                timePref.saveSPString(TimePref.TM_SELESAI, time);
-
-                Intent result = new Intent(WeighActivity.this, ResultActivity.class);
-                result.putExtra("plan", plan);
-                startActivity(result);
-                finish();
+                AlertDialog dialog = alert.create();
+                dialog.show();
             }
         });
 
@@ -128,6 +134,9 @@ public class WeighActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (threadReceive.isAlive()) {
                     threadReceive.interrupt();
+
+                    etValue.setText("");
+                    etValue.setError(null);
                 }
 
                 threadReceive = recieve();
@@ -176,6 +185,23 @@ public class WeighActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
+    }
+
+    public void doSave() {
+        plan.setWeighs(weighs);
+
+        if (threadReceive.isAlive())
+            threadReceive.interrupt();
+
+        // SET JAM SELESAI PANEN
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time = sdf.format(new Date());
+        timePref.saveSPString(TimePref.TM_SELESAI, time);
+
+        Intent result = new Intent(WeighActivity.this, ResultActivity.class);
+        result.putExtra("plan", plan);
+        startActivity(result);
+        finish();
     }
 
     public boolean validate() {

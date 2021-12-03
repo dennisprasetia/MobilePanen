@@ -87,6 +87,9 @@ public class TaraActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (threadReceive.isAlive()) {
                     threadReceive.interrupt();
+
+                    etValue.setText("");
+                    etValue.setError(null);
                 }
 
                 threadReceive = recieve();
